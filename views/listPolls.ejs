@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>List Current Polls</title>
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+  <script type="text/javascript" src="/assets/js/listPolls.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/addPoll.css">
+</head>
+<body>
+  <% include ../static/includes/nav.ejs %>
+  <div id="container">
+    <%if (data.data) {%>
+      <div id="form">
+      <table id="pollList">
+        <center>Click the headers to sort.</center>
+        <thead>
+          <td><span class="header" data-title="Title" id="pollName">Title</span></a></td>
+          <td><span class="header" data-title="User" id="username">User</span></a></td>
+          <td><span class="header" data-title="Votes" id="totalVotes">Votes</span></td>
+          <td><span class="header" data-title="Visits" id="accessCt">Visits</span></td>
+          <td><span class="header" data-title="Time Left" id="expiresOn">Time Left</span></td>
+        </thead>
+        <tbody>
+      </tbody>
+    </table>
+  </div>
+    <%} else {%>Weird. There aren't any polls available right now to vote on.<br />Why not <a href="/add">add</a> one of your own?
+    <%}%>
+  </div>
+</body>
+</html>

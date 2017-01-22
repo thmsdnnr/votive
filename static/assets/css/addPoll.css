@@ -1,0 +1,261 @@
+body {
+  background-color: rgba(232, 245, 233, 1);
+}
+
+nav {
+  width: auto;
+  height: 20px;
+  margin: 0px;
+  padding: 0px 2px 0px 2px;
+  font-family: 'Courier New', monospace;
+  font-weight: 100;
+  font-size: 20px;
+  color: #000000;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: auto;
+  vertical-align: middle;
+}
+
+h1 {
+  font-face: 'Helvetica Neue', sans-serif;
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+button.nav {
+  width: auto;
+  height: 40px;
+  padding: 10px;
+  font-size: 0.7em;
+  letter-spacing: 0.06em;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  border: 1px solid gold;
+}
+
+button.nav:hover {
+  background-color: tomato;
+  border: none;
+  outline: none;
+}
+
+span#navElement {
+  flex: 0 2 auto;
+  display: inline;
+  align-self: baseline;
+  color: black;
+  padding: 0px 4px 0px 4px;
+}
+
+div#pageContainer {
+  width: 740px;
+  height: auto;
+  margin: auto;
+  padding: 15px 0px 0px 0px;
+  font-family: 'Helvetica Neue', monospace;
+  font-weight: 100;
+  font-size: 24px;
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  display: -webkit-flex;
+}
+
+div#pollList {
+  width: auto;
+  height: auto;
+  flex: 0 1 auto;
+  justify-content: center;
+}
+
+div#infoHead {
+  flex: 0 1 auto;
+  width: auto;
+  height: auto;
+  padding: 0px 10px 0px 0px;
+}
+
+div#canvas{
+  width: auto;
+  max-width: 500px;
+  height: auto;
+  max-height: 500px;
+  margin: auto;
+  outline: none;
+  float: left;
+}
+
+div#rightBar {
+  flex: 0 1 auto;
+  float: right;
+  word-wrap: break-word;
+}
+
+canvas {
+  flex: 0 1 auto;
+  width: 400px;
+  max-width: 500px;
+  min-width: 50px;
+  height: auto;
+  max-height: 700px;
+  margin: auto;
+  outline: none;
+}
+
+div#formContainer {
+  width: auto;
+  padding: 10px;
+  height: auto;
+  margin: auto;
+  flex: 0 1 auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+div#formController{
+  flex: 0 1 auto;
+  align-self: center;
+  width: 100px;
+}
+
+input.poll {
+  width: 300px;
+  height: 40px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: black;
+  outline: none;
+  padding-left: 5px;
+}
+
+input[type=number] {
+  width: 300px;
+}
+
+input:focus {
+  border: 1px solid gold;
+}
+
+input#s {
+  display:none;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
+}
+
+button#vote {
+  font-family: 'Helvetica Neue', monospace;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 1.2em;
+  height: auto;
+  width: 100px;
+  padding: 2px;
+  margin: 2px;
+  outline: none;
+}
+
+button#vote:hover {
+  background-color: gold;
+  border: none;
+  outline: none;
+  transition: background-color 250ms ease-in-out;
+}
+
+span.header  {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
+  cursor: pointer;
+}
+
+span#message {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  padding: 1px;
+  margin: 1px;
+  color: white;
+  height: auto;
+  width: auto;
+  background-color: black;
+  display: none;
+}
+
+span#delete {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  display: inline;
+  padding: 2px;
+  margin: 2px;
+  color: white;
+  height: auto;
+  width: auto;
+  vertical-align: middle;
+}
+
+table a {
+  color: rgba(185, 246, 202, 1);
+  outline: none;
+}
+
+table a:hover {
+  color: rgba(105, 240, 174, 1);
+}
+
+table#pollList {
+  background-color: rgba(0,130,34,0.8);
+  color: rgba(232, 245, 233, 1);
+  margin: auto;
+}
+
+td {
+  padding: 10px;
+  border: 1px dotted black;
+}
+
+thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+div#container {
+  font-family: 'Helvetica Neue', monospace;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 1.2em;
+  padding: 20px;
+  border: 2px solid silver;
+  background-color: rgba(67, 160, 71, 1);
+  color: rgba(185, 246, 202, 1);
+  display: flex;
+  width: 600px;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 7px 1px rgba(165, 214, 167, 1);
+  -moz-box-shadow: 2px 2px 7px 1px rgba(165, 214, 167, 1);
+  box-shadow: 2px 2px 7px 1px rgba(165, 214, 167, 1);
+}
+
+div#form {
+  flex: 0 1 auto;
+  padding: 10px;
+  margin: auto;
+  justify-content: center;
+}
+
+a {
+  color: rgba(255, 61, 0, 1);
+  outline: none;
+}
+
+a:hover {
+  color: rgba(255, 158, 128, 1);
+}

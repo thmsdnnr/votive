@@ -1,0 +1,11 @@
+<nav>
+  <%if (data.user) {%>
+  <span id="navElement"><a href="/add">CREATE</a></span>
+  <span id="navElement"><a href="/dash">MINE</a></span>
+  <span id="navElement"><a href="/list">EVERYONE'S</a></span>
+  <span id="navElement"><a href="/logout">LOG OUT</a></span>
+  <%}%>
+  <%if (!data.user) {%>
+    <span id="navElement"><a href="/">LOG IN</a></span>
+    <%}%>
+</nav>

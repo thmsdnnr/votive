@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>Vote On A Poll</title>
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+  <script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+  <script type="text/javascript" src="/assets/js/votive.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/addPoll.css">
+</head>
+<body>
+  <% include ../static/includes/nav.ejs %>
+  <div id="pageContainer">
+    <div id="rightBar">
+    <h1><em><%=data.data[0].pollName%></em>
+      <a class="twitter-share-button"
+    href="https://twitter.com/intent/tweet?text=<%=data.data[0].pollName%>. Vote now and decide who wins with VOTIVE."
+    data-size="large">
+  Tweet This Poll!</a></h1>
+  <div id="canvas">
+    <button id="chartToggle" value="bar">BAR</button>
+    <button id="chartToggle" value="doughnut">DOUGHNUT</button>
+    <center><canvas class="chart"></canvas></center>
+</div>
+  <% let timeLeft=data.data[0].expiresOn-Date.now();%>
+  <% if (timeLeft>0) {%>
+    <h2>Only <%=Math.floor(timeLeft/60000)%> minutes left to vote!</h2>
+    <%}%>
+    <%if (data.data[0].expiresOn) {%>
+    <% if (timeLeft<=0) {%>
+      <h1>THE POLL IS OVER!</h1><%}}%>
+    <% if (timeLeft>0||data.data[0].expiresOn==='') {%>
+    <div id="formContainer">
+    <form method="POST" action="/vote">
+      <input type="hidden" name="pollID" value="<%=data.pollID%>">
+      <select name="vote" id="choose">
+      <%let keys=Object.keys(data.data[0].votes);%>
+      <%keys.forEach(k=>{%>
+      <option value="<%=k%>"><button id="vote" value="<%=k%>"><%=k%></button></option>
+      <%});%>
+    </select><br />
+    <%if (data.user!==undefined) {%><input type="text" name="newOption" placeholder="Another option entirely!" /><%}%><br />
+    <input type="submit" style="display:none"><button id="vote">VOTE</button></input>
+  </form>
+  </div>
+  <%}%>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-image: url('/assets/images/votive.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 3.2em;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+}
+
+h2 {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5em;
+  font-weight: 100;
+  letter-spacing: 0em;
+}
+
+div#container {
+  padding: 40px;
+  border: 2px solid silver;
+  background-color: rgba(111,111,111,0.6);
+  display: flex;
+  width: 400px;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 7px 1px rgba(65,63,69,0.49);
+  -moz-box-shadow: 2px 2px 7px 1px rgba(65,63,69,0.49);
+  box-shadow: 2px 2px 7px 1px rgba(65,63,69,0.49);
+}
+
+div#form {
+  flex: 0 1 auto;
+  padding: 10px;
+  margin: auto;
+  justify-content: center;
+}
+
+input {
+  padding: 1em;
+  outline: none;
+  font-family: 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 1em;
+}
+
+input[type=submit]{
+  display: none;
+}
+
+button {
+  width: 200px;
+  height: auto;
+  padding: 20px 20px 20px 20px;
+  margin: 1em;
+  border: 2px solid black;
+  outline: none;
+  font-size: 1em;
+  letter-spacing: .4em;
+  background-color: rgba(0,0,153,0.4);
+  color: #CCCCCC;
+}
+
+button:hover {
+  background-color: rgba(0,0,53,0.9);
+  border: 2px dotted green;
+  color: #FFFFFF;
+  transition: 200ms all bounce-in;
+  outline: none;
+}
+
+a {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.2em;
+  font-weight: 100;
+  color: rgba(244, 143, 177, 1);
+  background-color: rgba(0,0,153,0.3);
+  letter-spacing: .2em;
+  outline: none;
+  padding: 5px 5px 5px 5px;
+}
+
+a:hover {
+  background-color: rgba(0,0,153,0.7);
+  transition: 300ms all ease-in;
+  outline: none;
+}
+
+span#warning {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  display: inline-block;
+  padding: 0;
+  margin: 10px 0 0 0;
+  color: white;
+  background-color: red;
+  height: auto;
+  width: auto;
+}
+
+span#message {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px 0 0 0;
+  color: white;
+  height: auto;
+  width: auto;
+  background-color: black;
+}
+
+div#sprite {
+  margin: 5px;
+}
+
+img#candle {
+  border-radius: 50%;
+}
+
+img#candle:hover {
+  background-color: rgba(153,0,0,0.7);;
+  transform: scale(1.1) rotateZ(360deg);
+  transition: all 500ms ease-in;
+}
