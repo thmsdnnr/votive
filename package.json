@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "engines": {
+    "node": "6.9.4",
+    "npm": "3.10.10"
+  },
   "author": "thomasdanner",
   "license": "ISC",
   "dependencies": {
@@ -17,10 +21,8 @@
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "express-session": "^1.15.0",
     "mongodb": "^2.2.21",
     "path": "^0.12.7"
-  },
-  "engines": {
-    "node": "6.9.4"
   }
 }
