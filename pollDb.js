@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID=require('mongodb').ObjectID;
 let dbCon;
-let dbUrl='mongodb://localhost:27017/ndlrn';
+let dbUrl=process.env.PROD_DB||'mongodb://localhost:27017/';'mongodb://localhost:27017/ndlrn';
 
 /*POLLS*/
 //CRUD:

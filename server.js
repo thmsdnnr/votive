@@ -11,7 +11,7 @@ const app=express();
 app.use(cookieParser());
 app.use(session({
   store: new MongoStore({
-    url: 'mongodb://localhost:27017/ndlrn',
+    url: process.env.PROD_DB||'mongodb://localhost:27017/ndlrn',
     ttl: 14 * 24 * 60 * 60 // = 14 days. Default
   }), //https://github.com/jdesboeufs/connect-mongo
   secret:'DREAMSBEDREAMS',
@@ -262,5 +262,5 @@ app.get('*', function(req,res) {
 })
 
 //app.post('/vote')
-app.listen(3000);
-console.log('running on port 3000');
+app.listen((process.env.PORT||3000));
+console.log('i am listening to you');
