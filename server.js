@@ -27,11 +27,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname+'/views'));
 
 app.get('/', function(req,res) {
-  console.log(req.session);
-  //console.log(req.connection.remoteAddress);
-  //console.log(req.headers['x-forwaded-for']);
-  console.log(req.session.user);
-  res.render('login',{warning:false});
+  res.send('success');
+  //res.render('login',{warning:false});
 });
 
 app.get('/add', function(req,res){
