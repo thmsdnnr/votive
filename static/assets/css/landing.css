@@ -144,6 +144,10 @@ div#sprite {
   margin: 5px;
 }
 
+div#sprite a {
+  background-color: transparent;
+}
+
 img#candle {
   border-radius: 50%;
 }
