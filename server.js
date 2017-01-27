@@ -5,6 +5,7 @@ const cookieParser=require('cookie-parser');
 const session = require('express-session');
 const btoa=require('btoa');
 const MongoStore = require('connect-mongo')(session);
+const sha1=require('sha1');
 const Db=require('./pollDb.js');
 
 const app=express();
@@ -167,13 +168,13 @@ app.get('/dash', function(req,res) {
 
 app.post('/login', function(req,res) {
     let inputUser=req.body.username;
-    let inputPwd=req.body.password; //TODO Cannot read property srnm of undefined if MYRON
+    let inputPwd=req.body.password;
     if (inputUser===''||inputPwd==='') { res.render('login',{warning:true}); return false;}
     else {
       Db.fetchUser({'username':inputUser},function(data){
         console.log(data+"data");
         if(data) {
-          if ((data[0].username===inputUser)&&(data[0].password===inputPwd))
+          if ((data[0].username===inputUser)&&(data[0].password===sha1(inputPwd)))
           {
             req.session.user=inputUser;
             res.redirect('/dash');
@@ -187,9 +188,6 @@ app.post('/login', function(req,res) {
           {
             req.session.user='';
             res.render('login',{warning:true});
-            //res.status(401);
-            //res.write(`INVALID USERNAME OR PASSWORD TRY AGAIN OR GO AWAY`);
-            //res.end();
           }
         });
       }
@@ -201,7 +199,7 @@ app.post('/register', function(req,res) {
   Db.findUser({'username':inputUser},function(data){
     if (!data[0]) {
       if (inputPwd!=="") {
-        Db.saveUser({'username':inputUser,'password':inputPwd},function(){
+        Db.saveUser({username:inputUser,password:sha1(inputPwd)},function(){
           req.session.user=inputUser;
           console.log(req.session.user+"sessionuser");
           let payload={header:'Welcome to Votive!', message:`Welcome, ${inputUser}.`,link:'/login'};

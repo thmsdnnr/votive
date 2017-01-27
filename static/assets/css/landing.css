@@ -59,6 +59,7 @@ span#demoFooter {
   position: fixed;
   right: 10px;
   bottom: 10px;
+  background-color: rgba(15,255,245,0.4);
 }
 
 span#demoFooter a {
