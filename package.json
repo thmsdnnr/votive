@@ -1,14 +1,14 @@
 {
   "name": "votive",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a simple voting app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec.js",
     "start": "node server.js"
   },
   "engines": {
-    "node": "6.9.4",
+    "node": "6.11.3",
     "npm": "3.10.10"
   },
   "author": "thomasdanner",
@@ -22,8 +22,10 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.15.0",
+    "mocha": "^4.0.0",
     "mongodb": "^2.2.21",
     "path": "^0.12.7",
+    "selenium-webdriver": "^3.5.0",
     "sha1": "^1.1.1"
   }
 }

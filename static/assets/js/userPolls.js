@@ -68,7 +68,6 @@ window.onload = function() {
   function updateHeaders() {
     let now=document.querySelector(`span#${currentSortKey}`);
     let then=document.querySelector(`span#${lastSortKey}`);
-    console.dir(now);
     let arrow;
     (currentSortDirection==='asc') ? arrow='↑' : arrow='↓';
     now.textContent=`${now.dataset.title} ${arrow}`;

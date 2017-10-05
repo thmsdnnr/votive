@@ -7,12 +7,11 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/addPoll.css">
 </head>
 <body>
-  <% include ../static/includes/nav.ejs %>
-  <div id="container">
+  <div id="pageContainer">
+    <div id="formContainer">
+      <% include ../static/includes/nav.ejs %>
     <%if (data.data) {%>
-      <div id="form">
       <table id="pollList">
-        <center>Click the headers to sort.</center>
         <thead>
           <td><span class="header" data-title="Title" id="pollName">Title</span></td>
           <td><span class="header" data-title="User" id="username">User</span></td>
@@ -23,7 +22,7 @@
         <tbody>
       </tbody>
     </table>
-  </div>
+    <h3>Click the headers to sort.</h3>
     <%} else {%>
       <p>Weird. There aren't any polls available right now to vote on. Why not <a href="/add">add</a> one of your own?</p>
     <%}%>

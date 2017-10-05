@@ -32,7 +32,6 @@ app.get('/', function(req,res) {
 });
 
 app.get('/add', function(req,res){
-  console.log(req.session);
   let payload={user:req.session.user};
   (req.session.user) ? res.render('addPoll',{data:payload}) : res.render('login',{warning:false});
 });
@@ -45,7 +44,7 @@ app.get('/logout', function(req,res){
 
 app.get('/list', function(req,res){
   Db.listAllPolls(function(d) {
-    if (d!=='') { //TODO pass data[0] in the response to make the EJS cleaner
+    if (d!=='') {
       let payload={data:d,user:req.session.user};
       res.render('listPolls', {data:payload});
     }
@@ -56,9 +55,8 @@ app.get('/v/:pollID', function(req,res) {
   if(req.params.pollID!==null){
     Db.loadPoll(req.params.pollID, function(d){
       if(d!=='') {
-          console.log(req.params.pollID);
-          let payload={pollID:req.params.pollID,data:d,user:req.session.user};
-          res.render('displayPoll', {data:payload});
+        let payload={pollID:req.params.pollID,data:d,user:req.session.user};
+        res.render('displayPoll', {data:payload});
       }
       else {
         res.send('INVALID POLL ID');
@@ -71,10 +69,8 @@ app.get('/p/:pollName', function(req,res) {
   if(req.params.pollID!==null){
     Db.loadPollByName(req.params.pollName, function(d) {
       if(d!=='') {
-        //console.log(d[0]['_id']);
-//          console.log(req.params.pollID); //TODO: d-id
-          let payload={pollID:d[0]['_id'],data:d,user:req.session.user};
-          res.render('displayPoll', {data:payload});
+        let payload={pollID:d[0]['_id'],data:d,user:req.session.user};
+        res.render('displayPoll', {data:payload});
       }
       else {
         res.send('INVALID POLL NAME');
@@ -85,7 +81,6 @@ app.get('/p/:pollName', function(req,res) {
 
 app.post('/vote', function(req,res) {
   let data={};
-  console.log(req.body);
   if (!req.body.newOption) {
     data={id:req.body.pollID, vote:req.body.vote};
     Db.voteOnPoll(data, function(){
@@ -99,7 +94,6 @@ app.post('/vote', function(req,res) {
         let lKeys=vKeys.map(k=>k.toLowerCase());
         let index = lKeys.indexOf(req.body.newOption.toLowerCase());
         if(index!==-1){
-          console.log(vKeys[index]+" vkeys index");
           data={id:req.body.pollID, vote:vKeys[index]};
           Db.voteOnPoll(data, function(){
             res.redirect(`/v/${req.body.pollID}`);
@@ -119,7 +113,6 @@ app.post('/vote', function(req,res) {
 const randWords=['blue','cat','steel','shark','fin','tornado','pink','purple','black','feather','fox','hound','dog','kitten'];
 
 app.post('/add', function(req,res) {
-  console.log(req);
   if(req.body!==''){ //add to database
     let expiresOn;
     (req.body.ttv!=='') ? expiresOn=Date.now()+(1000*60*60*req.body.ttv) : expiresOn=''; //60 min/hr, 60 seconds/min, 1000ms/second
@@ -130,10 +123,7 @@ app.post('/add', function(req,res) {
     hyphenName=`${hyphenName}-${randChunk}${randAnimal}`;
     let voteObj={}
     choices.forEach(c=>voteObj[c]=0);
-    console.log(hyphenName);
-    console.log(voteObj);
     Db.savePoll({username:req.session.user, pollName:req.body.name, expiresOn:expiresOn, votes:voteObj, hName:hyphenName},function(val){
-      console.log(val);
       res.redirect('/p/'+val.ops[0].hName); //redirect to new poll on creation
     });
   }
@@ -146,7 +136,6 @@ app.get('/login', function(req,res) {
 app.get('/register', function(req,res) { res.render('register', {warning:false}); });
 
 app.get('/dash', function(req,res) {
-  console.log(req.session.user);
   if (req.session.user!==undefined) {
   Db.getUserPolls(req.session.user, function(d) {
     if(d) {
@@ -154,7 +143,6 @@ app.get('/dash', function(req,res) {
       res.render('userPolls',{data:payload});
     }
     else {
-      console.log('no data');
       let payload={data:null,user:req.session.user};
       res.render('userPolls',{data:payload});
     }
@@ -169,25 +157,24 @@ app.get('/dash', function(req,res) {
 app.post('/login', function(req,res) {
     let inputUser=req.body.username;
     let inputPwd=req.body.password;
-    if (inputUser===''||inputPwd==='') { res.render('login',{warning:true}); return false;}
+    if (inputUser===''||inputPwd==='') { res.render('login',{data:{warning:true}}); return false;}
     else {
-      Db.fetchUser({'username':inputUser},function(data){
-        console.log(data+"data");
-        if(data) {
-          if ((data[0].username===inputUser)&&(data[0].password===sha1(inputPwd)))
+      Db.fetchUser({'username':inputUser},function(D){
+        if(D) {
+          if ((D[0].username===inputUser)&&(D[0].password===sha1(inputPwd)))
           {
             req.session.user=inputUser;
             res.redirect('/dash');
           }
           else {
             req.session.user='';
-            res.render('login',{warning:true});
+            res.render('login',{data:{warning:true}});
           }
         }
         else
           {
             req.session.user='';
-            res.render('login',{warning:true});
+            res.render('login',{data:{warning:true}});
           }
         });
       }
@@ -201,9 +188,8 @@ app.post('/register', function(req,res) {
       if (inputPwd!=="") {
         Db.saveUser({username:inputUser,password:sha1(inputPwd)},function(){
           req.session.user=inputUser;
-          console.log(req.session.user+"sessionuser");
-          let payload={header:'Welcome to Votive!', message:`Welcome, ${inputUser}.`,link:'/login'};
-          res.render('message',{data:payload});
+          let payload={message:`Welcome to Votive, ${inputUser}!<br />`, uName:inputUser};
+          res.render('login',{data:payload});
       });
       }
       else {
@@ -255,5 +241,4 @@ app.get('*', function(req,res) {
   res.send('Invalid path! Sorry.');
 })
 
-app.listen(process.env.PORT);
-console.log('i am listening to you');
+app.listen(process.env.PORT || 8080);

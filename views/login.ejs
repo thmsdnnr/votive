@@ -1,21 +1,22 @@
 <html>
 <head>
-  <title>LOGIN TO VOTIVE</title>
+  <title>Login to Votive</title>
 <link rel="stylesheet" type="text/css" href="/assets/css/landing.css">
 </head>
 <body>
   <div id="container">
     <div id="form">
-      <h1>VOTIVE<div id="sprite">
-          <img src="/assets/images/votive.svg" width="100" height="100" id="candle">
-        </div></h1>
+      <h1>VOTIVE</h1>
+      <%if(locals.data&&locals.data.message){%><p><span id="message"><%=data.message%></span></p><%}%>
       <form action="/login" method="post">
-        <input type="text" placeholder="Username" name="username" autofocus required /><br />
-        <input type="password" placeholder="Password" name="password" required /><br />
-        <%if(warning===true){%><span id="warning">Invalid. Try again.</span><%}%>
+        <% var inputs; %>
+        <%if(locals.data&&locals.data.uName){inputs=`<input type="text" name="username" value=${data.uName} /><br /><input type="password" placeholder="Password" name="password" autofocus required /><br />`;} else {%>
+        <%inputs=`<input type="text" placeholder="username" name="username" autofocus required /><br /><input type="password" placeholder="password" name="password" required /><br />`;}%>
+        <%-inputs%>
+        <%if(locals.data&&locals.data.warning){%><span id="warning">Invalid. Try again.</span><%}%>
         <input type="submit"><button id="submit">COME IN</button></input>
       </form>
-      <a href="/register">register</a><br />
+      <h2><a href="/register">register</a></h2><br />
       </div>
     </div>
     <% include ../static/includes/demofooter.ejs %>

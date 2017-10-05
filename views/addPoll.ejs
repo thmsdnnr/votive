@@ -1,16 +1,16 @@
 <html>
 <head>
-  <title>Add Poll</title>
+  <title>Add A New Poll</title>
 <link rel="stylesheet" type="text/css" href="/assets/css/addPoll.css">
 <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
 <script type="text/javascript" src="/assets/js/addPoll.js"></script>
 </head>
 <body>
-  <% include ../static/includes/nav.ejs %>
   <div id="pageContainer">
-  <div id="formContainer">
+    <div id="formContainer">
+      <% include ../static/includes/nav.ejs %>
       <form method="POST" action="/add" id="add">
-        <input type="text" placeholder="Poll Name" name="name" class="poll" id="name" autofocus /><br />
+        <input type="text" placeholder="Poll Name" name="name" class="poll" id="name" autofocus required/><br />
         <input type="text" placeholder="Add a Choice" class="poll" id="choice"><br />
         <div id="choices"></div>
         <input type="number" placeholder="Hours to Vote, blank=no limit" min="0" max="8766" name="ttv" class="poll" optional /><br />

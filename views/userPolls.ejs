@@ -1,19 +1,19 @@
 <html>
 <head>
-  <title>ALL MY POLLS</title>
+  <title>All My Polls</title>
   <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
   <script type="text/javascript" src="/assets/js/userPolls.js"></script>
   <link rel="stylesheet" type="text/css" href="/assets/css/addPoll.css">
 </head>
 <body>
-  <% include ../static/includes/nav.ejs %>
-  <div id="container">
-    <div id="form">
+  <div id="pageContainer">
+    <div id="formContainer">
+      <% include ../static/includes/nav.ejs %>
     <%if (data.data) {%>
     <form method="POST" action="/update" id="update">
       <table id="pollList">
-        <thead>Click the headers to sort.
+        <thead>
           <td><span class="header" data-title="Title" id="pollName">Title</span></a></td>
           <td><span class="header" data-title="Votes" id="totalVotes">Votes</span></td>
           <td><span class="header" data-title="Visits" id="accessCt">Visits</span></td>
@@ -23,8 +23,10 @@
         <tbody>
       </tbody>
     </table>
-    <%} else {%>You don't have any polls right now, <%=data.user%>.<br />
-    That's okay, though.<br />
+    <h3>Click the headers to sort.</h3>
+    <%} else {%>
+    You don't have any polls right now, <%=data.user%>. <br />
+    That's okay, though. <br />
     Check out <a href="/list">all these other awesome polls</a> from our users!
     <%}%>
   </form>

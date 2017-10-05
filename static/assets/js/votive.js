@@ -41,7 +41,10 @@ window.onload = function() {
     values[i]=window.INITIAL_STATE.data[0].votes[keys[i]];
   }
 
+  const truncateKeys = (keyArr) => keyArr.map(e=>e.length>15 ? e.slice(0,12)+'...' : e);
+
   function genChart(cType='bar'){
+    keys=truncateKeys(keys);
     currentType=cType;
     var ctx = document.querySelector('canvas.chart');
     var ticksOn=true;
@@ -67,7 +70,7 @@ window.onload = function() {
             }],
             yAxes: [{
               gridLines: { display: false },
-              ticks: {display: ticksOn, stepSize: 1, beginAtZero: true},
+              ticks: {display: ticksOn, stepSize: 5, beginAtZero: true},
               }]
           }
       }
