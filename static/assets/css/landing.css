@@ -150,13 +150,3 @@ span#message {
   width: auto;
   background-color: black;
 }
-
-img#candle {
-  border-radius: 50%;
-}
-
-img#candle:hover {
-  background-color: rgba(153,0,0,0.7);;
-  transform: scale(1.1) rotateZ(360deg);
-  transition: all 500ms ease-in;
-}

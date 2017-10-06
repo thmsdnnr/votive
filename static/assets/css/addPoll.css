@@ -117,29 +117,6 @@ div#infoHead {
   padding: 0px 10px 0px 0px;
 }
 
-div#canvas{
-  width: auto;
-  background-color: #E8EAF6;
-  padding: 20px;
-  max-width: 700px;
-  height: auto;
-  margin: auto;
-  outline: none;
-  float: left;
-  border: 1px solid black;
-}
-
-canvas {
-  flex: 0 1 auto;
-  width: 400px;
-  max-width: 500px;
-  min-width: 50px;
-  height: auto;
-  max-height: 700px;
-  margin: auto;
-  outline: none;
-}
-
 div.selectStyle {
   padding: 0;
   margin: auto;
@@ -163,6 +140,7 @@ div.selectStyle select:focus {
 }
 
 div#rightBar {
+  max-width: 500px;
   background-color: #C5CAE9;
   padding: 0px 20px;
   flex: 0 1 auto;
@@ -191,6 +169,29 @@ div#choiceContainer {
   flex: 0 1 auto;
   border: 1px solid black;
   text-align: center;
+}
+
+div#canvas{
+  width: auto;
+  background-color: #E8EAF6;
+  padding: 10px;
+  max-width: 700px;
+  height: auto;
+  margin: auto;
+  outline: none;
+  border: 1px solid black;
+  border-bottom: none;
+}
+
+canvas {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: 500px;
+  min-width: 50px;
+  height: auto;
+  max-height: 700px;
+  margin: auto;
+  outline: none;
 }
 
 div#formController{
@@ -226,6 +227,8 @@ input#s {
   user-select: none;
 }
 
+/* TODO refactor #vote and #submit to use a class */
+
 button#vote {
   font-family: 'Helvetica Neue', monospace;
   font-weight: 100;
@@ -239,6 +242,26 @@ button#vote {
 }
 
 button#vote:hover {
+  background-color: gold;
+  border: none;
+  outline: none;
+  padding: 2px;
+  margin: 2px;
+}
+
+button#sub {
+  font-family: 'Helvetica Neue', monospace;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-size: 1.2em;
+  height: auto;
+  width: 100px;
+  padding: 2px;
+  margin: 2px;
+  outline: none;
+}
+
+button#sub:hover {
   background-color: gold;
   border: none;
   outline: none;

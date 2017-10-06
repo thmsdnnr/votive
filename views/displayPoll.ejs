@@ -35,9 +35,9 @@
     <div id="toggleButtons">
       <button id="chartToggle" value="bar">BAR</button>
       <button id="chartToggle" value="doughnut">DOUGHNUT</button>
+      <canvas class="chart"></canvas>
     </div>
-    <center><canvas class="chart"></canvas></center>
-</div>
+  </div>
   <% if (timeLeft>0) {%>
     <h3 style="color:#000000">Only <%=Math.floor(timeLeft/60000)%> minutes left to vote!</h3>
     <%}%>
@@ -47,7 +47,7 @@
     <% if (timeLeft>0||data.data[0].expiresOn==='') {%>
     <div id="choiceContainer">
     <form method="POST" action="/vote">
-      <input type="hidden" name="pollID" value="<%=data.pollID%>">
+      <input type="hidden" name="hName" value="<%=data.hName%>">
       <div class="selectStyle">
       <select name="vote" id="choose">
       <%let keys=Object.keys(data.data[0].votes);%>

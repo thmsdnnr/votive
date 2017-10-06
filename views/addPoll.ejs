@@ -10,13 +10,13 @@
     <div id="formContainer">
       <% include ../static/includes/nav.ejs %>
       <form method="POST" action="/add" id="add">
-        <input type="text" placeholder="Poll Name" name="name" class="poll" id="name" autofocus required/><br />
+        <input type="text" placeholder="Poll Name" name="name" class="poll" id="name" autofocus/><br />
         <input type="text" placeholder="Add a Choice" class="poll" id="choice"><br />
         <div id="choices"></div>
-        <input type="number" placeholder="Hours to Vote, blank=no limit" min="0" max="8766" name="ttv" class="poll" optional /><br />
+        <input type="number" placeholder="Hours to Vote, blank=no limit" min="0" max="8766" name="ttv" class="poll" /><br />
         <input type="hidden" name="choices" id="choiceSubmit">
         <span id="message"></span>
-        <button id="vote">submit</button>
+        <button id="sub">submit</button>
       </form>
 </div>
 </div>

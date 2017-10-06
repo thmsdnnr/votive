@@ -45,7 +45,7 @@ window.onload = function() {
   let poll=document.querySelector('input#poll');
   let pName=document.querySelector('input#name');
   let form=document.querySelector('form#add');
-  let button=document.querySelector('button#vote');
+  let button=document.querySelector('button#sub');
 
   button.addEventListener('mousedown', validateSubmit);
   form.addEventListener('submit', cancelIt);
@@ -59,16 +59,18 @@ window.onload = function() {
     if (e.type==="mousedown") {
       let choicesToSubmit=Object.keys(choices);
       document.querySelector('input#choiceSubmit').value=choicesToSubmit;
-      if (choicesToSubmit.length>1) {
-        form.submit();
+      if (!pName.value||!pName.value.match(/[0-9a-z]/gi)) {
+        message.innerHTML=`Sorry, but your poll must have a title!<br />`;
+        message.style.display='inline';
+        return false;
       }
-      else {
+      else if (choicesToSubmit.length<2) {
         message.innerHTML=`Sorry, but you need at least two choices!<br />`;
         message.style.display='inline';
+        return false;
       }
-    }
-    else {
-      return;
+      pName.value=pName.value.trim();
+      form.submit();
     }
   }
 }

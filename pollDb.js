@@ -34,7 +34,8 @@ exports.getUserPolls = function(data,cb) {
 }
 
 exports.savePoll = function(data,cb) {
-  db.collection("polls").insert({username:data.username, pollName:data.pollName, expiresOn:data.expiresOn, votes:data.votes, totalVotes:0, hName:data.hName},
+  db.collection("polls").insert(
+    {username:data.username, pollName:data.pollName, expiresOn:data.expiresOn, votes:data.votes, totalVotes:0, accessCt:0, hName:data.hName},
   function(err,data){ if(!err) { cb(data); } else { cb(false); }
   });
 }
@@ -45,10 +46,15 @@ exports.deletePoll = function(data,cb) {
   cb();
 }
 
+exports.deletePollByName = function(name,cb) {
+  //let objID=new ObjectID(data);
+  db.collection("polls").deleteOne({hName:name});
+  cb();
+}
+
 exports.voteOnPoll = function(data,cb) {
-  let objID=new ObjectID(data.id);
   let vote=`votes.${data.vote}`;
-  db.collection("polls").update({"_id":objID},{'$inc':{[vote]:1,totalVotes:1}});
+  db.collection("polls").update({"hName":data.hName},{'$inc':{[vote]:1,totalVotes:1}});
   cb('success');
   }
 
@@ -59,10 +65,17 @@ exports.loadPoll = function(data,cb) {
     if(!err) { (docs.length) ? cb(docs) : cb(false); } });
   }
 
-exports.loadPollByName = function(data,cb) {
-  db.collection("polls").find({'hName':data}).toArray(function(err, docs) {
+exports.loadPollByName = function(name,cb) {
+  db.collection("polls").find({'hName':name}).toArray(function(err, docs) {
     if(!err) { (docs.length) ? cb(docs) : cb(false); } });
   }
+
+exports.loadPollsWithPrefix = function(data,cb) {
+  let regex=new RegExp(`(${data})`,'i');
+  db.collection("polls").find({'hName':regex}).toArray(function(err, docs) {
+    if(!err) { (docs.length) ? cb(docs) : cb(false); }
+  });
+}
 
 /*USERS*/
 //CRUD:
@@ -73,8 +86,9 @@ exports.fetchUser = function(query,cb) { //find a user in the DB given a usernam
     if (!err) {
       db.collection("users").updateOne({username:query.username}, {$set:{lastIn:new Date()}});
       (docs.length>0) ? cb(docs) : cb(false);
-      } });
-    }
+      }
+  });
+}
 
 exports.findUser = function(query,cb) { //find a user in the DB given a username, return row
   db.collection("users").find({username:query.username}).toArray(function(err, docs) {

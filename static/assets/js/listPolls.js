@@ -59,8 +59,10 @@ window.onload = function() {
         if (!sRows[i][2]['expiresOn']) { expiryText=`never expires`;}
         else { (expiresIn<=0) ? expiryText=`EXPIRED` : expiryText=`${Math.floor(expiresIn/(1000*60))} minute(s)`; }
         let row=document.createElement('tr');
-        row.innerHTML+=`<td><a href="/v/${sRows[i][2]['_id']}">${sRows[i][2]['pollName']}</a></td>`;
-        row.innerHTML+=`<td>${sRows[i][2]['username']}</td><td>${sRows[i][2]['totalVotes']}</td> <td>${sRows[i][2]['accessCt']}</td>`;
+        row.innerHTML+=`<td><a href="/p/${sRows[i][2]['hName']}">${sRows[i][2]['pollName']}</a></td>`;
+        row.innerHTML+=`<td>${sRows[i][2]['username']}</td><td>${sRows[i][2]['totalVotes']}</td>
+        <td>${sRows[i][2]['accessCt']}</td>`;
+
         row.innerHTML+=`<td>${expiryText}</td></tr>`;
         tBody.appendChild(row);
       }
