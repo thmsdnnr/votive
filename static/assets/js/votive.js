@@ -29,13 +29,11 @@ function randomizeArray(arr) { //returns the array with elements ordered randoml
 
 function updateSelectorBox(choices) {
   let cBox=document.querySelector('select#choose');
-  console.dir(cBox);
   while (cBox.options.length) { cBox.remove(0); }
   choices.forEach(c=>{
     newOpt=new Option(c,c);
     cBox.options.add(newOpt);
   });
-
 }
 
 function genChart(type, data) { //data in key
@@ -124,6 +122,7 @@ function genChart(type, data) { //data in key
               borderColor: '#FFFFFF',
               borderWidth: 1
           }];
+      myChart.data.labels=keys;
       myChart.update();
   }
 }
