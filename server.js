@@ -22,7 +22,8 @@ app.use(session({
 }));
 app.locals.CURRENT_USER='';
 app.use(express.static(path.join(__dirname+'/static')));
-app.use(['/vote','/add','/login','/register','/d'],bodyParser.urlencoded({extended:true}));
+app.use(['/add','/login','/register','/d'],bodyParser.urlencoded({extended:true}));
+app.use('/vote',bodyParser.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname+'/views'));
 
@@ -98,8 +99,13 @@ app.post('/vote', function(req,res) {
   let data={};
   if (!req.body.newOption) {
     data={hName:req.body.hName, vote:req.body.vote};
-    Db.voteOnPoll(data, function(){
-      res.redirect(`/p/${req.body.hName}`);
+    Db.voteOnPoll(data, function() {
+      Db.loadPollByName(req.body.hName, function(d) {
+        if (d) {
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(JSON.stringify(d[0]));
+        }
+      });
     });
   } else { //entered a new option entirely!
     Db.loadPollByName(req.body.hName, function(d) {
@@ -109,15 +115,29 @@ app.post('/vote', function(req,res) {
         let index = lKeys.indexOf(req.body.newOption.toLowerCase());
         if(index!==-1){
           data={hName:req.body.hName, vote:vKeys[index]};
-          Db.voteOnPoll(data, function(){ res.redirect(`/p/${req.body.hName}`); });
+          Db.voteOnPoll(data, function(){
+            Db.loadPollByName(req.body.hName, function(d) {
+              if (d) {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(JSON.stringify(d[0]));
+              }
+            });
+          });
         } else { //we're good, insert new option.
           data={hName:req.body.hName, vote:req.body.newOption};
-          Db.voteOnPoll(data, function(){ res.redirect(`/p/${req.body.hName}`); });
-          }
+          Db.voteOnPoll(data, function(){ //res.redirect(`/p/${req.body.hName}`);
+          Db.loadPollByName(req.body.hName, function(d) {
+            if (d) {
+              res.writeHead(200, { 'Content-Type': 'text/html' });
+              res.end(JSON.stringify(d[0]));
+            }
+          });
+        });
         }
-      });
-    }
-  });
+      }
+    });
+  }
+});
 
 app.post('/add', function(req,res) {
   if(req.body!==''){ //add to database TODO checking of validity...

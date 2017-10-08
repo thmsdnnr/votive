@@ -54,8 +54,7 @@ exports.deletePollByName = function(name,cb) {
 
 exports.voteOnPoll = function(data,cb) {
   let vote=`votes.${data.vote}`;
-  db.collection("polls").update({"hName":data.hName},{'$inc':{[vote]:1,totalVotes:1}});
-  cb('success');
+  db.collection("polls").update({"hName":data.hName},{'$inc':{[vote]:1,totalVotes:1}},function(){ cb(); });
   }
 
 exports.loadPoll = function(data,cb) {

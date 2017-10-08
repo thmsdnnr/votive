@@ -2,6 +2,7 @@ window.onload = function() {
   let choices={};
   let choiceBox=document.querySelector('div#choices');
   let choice=document.querySelector('input#choice');
+  let timeToVote=document.querySelector('input#ttv');
   choice.addEventListener('keydown', handleChoice);
   let message=document.querySelector('span#message');
 
@@ -68,6 +69,18 @@ window.onload = function() {
         message.innerHTML=`Sorry, but you need at least two choices!<br />`;
         message.style.display='inline';
         return false;
+      }
+      else if (timeToVote.value) {
+        if (timeToVote.value<=1) {
+        message.innerHTML=`Sorry, but you have to give people time to vote!<br />`;
+        message.style.display='inline';
+        return false;
+        }
+        else if (timeToVote.value>8766) {
+          message.innerHTML=`Sorry, but you can only run polls for a maximum of one year.<br />`;
+          message.style.display='inline';
+          return false;
+        }
       }
       pName.value=pName.value.trim();
       form.submit();
